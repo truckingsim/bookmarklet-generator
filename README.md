@@ -16,6 +16,7 @@ If that works, so will phantomjs-node (a node module that is required). It's onl
 Once you have that running you need to install 2 node modules, phantom and stdio:
 
 `sudo npm install phantom`
+
 `sudo npm install https://github.com/truckingsim/stdio/archive/0.1.6.tar.gz`
 
 
