@@ -82,3 +82,12 @@ Then you likely don't have stdio installed.  Make sure your run
     sudo npm install https://github.com/truckingsim/stdio/archive/0.1.6.tar.gz
     
 Where 0.1.6 is the latest release.
+
+
+YUI Copyright
+=============
+
+We include the YUI compressor binary in order to output minified javascript easily.
+
+Copyright (c) 2013, Yahoo! Inc.
+All rights reserved.
