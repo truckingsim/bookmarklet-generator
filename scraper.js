@@ -21,7 +21,16 @@ url = ops.url;
 form = ops.form || false;
 delay = ops.delay || 1000;
 debug = ops.debug;
-jQuery = ops.localjQuery ? 'jquery.js' : 'https://code.jquery.com/jquery-2.1.0.min.js';
+
+/* If we are using the local version of jQuery we need to include via localhost
+ *     This is due to how phantomjs internally handles include.js
+ *          If done via a local file there is no callback, it only returns true/false
+ *          If done via a url there is callback to work with
+ *          So we have to use a url to load it
+ *
+ * This is only for testing purposes so we use phantomjs folder
+ */
+jQuery = ops.localjQuery ? 'http://localhost/phantomjs/jquery.js' : 'https://code.jquery.com/jquery-2.1.0.min.js';
 
 //Test mode setup, since url is required we are going to set it to google if test mode is active
 if(ops.args && ops.args.length && ops.args[0] === 'test'){
@@ -71,6 +80,8 @@ if(!testMode){
                                     name: $this.prop('name')
                                     , id: false
                                 };
+                                var id = '';
+                                var $label = false;
 
                                 if($this.prop('id') && $this.prop('id').length){
                                     properties.id = $this.prop('id');
@@ -85,8 +96,8 @@ if(!testMode){
 
                                     //First check to see if the radio has an ID, if it does look for a label
                                     //  that has a `for` attribute with that id
-                                    var id = $this.prop('id');
-                                    var $label = '';
+                                    id = $this.prop('id');
+                                    $label = '';
                                     if(id && id.length){
                                         $label = $('label[for=' + id + ']');
                                         if($label.length){
@@ -118,7 +129,7 @@ if(!testMode){
                                         fields.radios[properties.name].push(properties);
                                     }
                                 } else{
-
+                                    var includeInput = true;
                                     if(type === 'input'){
                                         var inputType = $this.prop('type');
                                         switch(inputType){
@@ -130,6 +141,36 @@ if(!testMode){
                                                 break;
                                             case 'checkbox':
                                                 properties.type = 'checkbox';
+                                                //We need to do the label craziness here as well
+                                                id = $this.prop('id');
+                                                $label = '';
+                                                if(id && id.length){
+                                                    $label = $('label[for=' + id + ']');
+                                                    if($label.length){
+                                                        //They had a label!  Now we need to make sure it is just
+                                                        //  text that we are getting back
+                                                        properties.label = $label.text().replace(/<\/?[^>]+(>|$)/g, '');
+                                                    }
+                                                }
+
+                                                //Basically if the label[for=id] didn't match we now need to do a little work
+                                                if(!properties.label){
+                                                    //Lets check to see if the input is wrapped in a label:
+                                                    if($this.parent().get(0).tagName.toLowerCase() === 'label'){
+                                                        $label = $this.parent();
+                                                        if($label.length){
+                                                            properties.label = $label.text().replace(/<\/?[^>]+(>|$)/g, '');
+                                                        }
+                                                    } else if(id && id.length){
+                                                        //We've given up all reasonable amount of hope of finding a label
+                                                        //  at this point and are just going to use the id as the label
+                                                        properties.label = id;
+                                                    }
+                                                }
+
+                                                if(!properties.label){
+                                                    includeInput = false;
+                                                }
                                                 break;
                                             default:
                                                 properties.type = inputType;
@@ -156,7 +197,9 @@ if(!testMode){
                                         }
                                     }
 
-                                    fields.notRadios.push(properties);
+                                    if(includeInput){
+                                        fields.notRadios.push(properties);
+                                    }
                                 }
                             });
 
