@@ -30,7 +30,7 @@ debug = ops.debug;
  *
  * This is only for testing purposes so we use phantomjs folder
  */
-jQuery = ops.localjQuery ? 'http://localhost/phantomjs/jquery.js' : 'https://code.jquery.com/jquery-2.1.0.min.js';
+jQuery = ops.localjQuery ? 'http://localhost/phantomjs/static/js/jquery.js' : 'https://code.jquery.com/jquery-2.1.0.min.js';
 
 //Test mode setup, since url is required we are going to set it to google if test mode is active
 if(ops.args && ops.args.length && ops.args[0] === 'test'){
