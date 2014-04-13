@@ -1,0 +1,31 @@
+//Import variables.less
+@import "variables.less";
+
+.menu {
+  margin-top: 20px;
+}
+
+.panel-container {
+  margin-top: 20px;
+}
+
+.list-group  > a.disabled  {
+  color: @nav-disabled-link-color;
+
+  &:hover,
+  &:focus {
+    color: @nav-disabled-link-hover-color;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: not-allowed;
+  }
+}
+
+span[data-toggle=tooltip] {
+  border-bottom: 1px dashed #000;
+  &:hover {
+    border-bottom: none;
+    cursor: pointer;
+  }
+  text-decoration: none;
+}
