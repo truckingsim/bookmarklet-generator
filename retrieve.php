@@ -1,8 +1,19 @@
 <?php
-$url = false;
+require ('vendor/autoload.php');
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+$url = null;
 $form = false;
 $delay = false;
 
+$request = Request::createFromGlobals();
+$errors = [];
+
+/**
+ * Parsing request to set all variables no matter how request is sent.
+ */
 
 //We are going to allow script to be run from either ajax or command line for now
 if(count($argv)){
@@ -37,11 +48,35 @@ if(count($argv)){
 		}
 	}
 } else {
-	//Get parameters... a little easier to parse.
+	$url = $request->request->get('url');
+	$form = $request->request->get('form', false);
+	$delay = $request->request->has('delay') ? (int)$request->request->get('delay') : false;
 }
 
 
-//echo exec('bin/phantomjs scrape.js', $lines, $return)
-$lines = shell_exec('nodejs /var/www/phantomjs/scraper.js -u "https://google.com" -f createUser -d 500');
+/**
+ * Basic validation
+ */
+if(is_null($url) || !strlen($url)){
+	$errors[] = 'Must provide URL';
+}
 
-echo $lines;
+if(!filter_var($url, FILTER_VALIDATE_URL) || !preg_match('/^http/', $url)){
+	$errors[] = 'Invalid URL, must start with http';
+}
+
+if($delay && (!is_int($delay) || $delay < 0 || $delay > 15000)){
+	$errors[] = 'Delay must be an integer above 0 and below 15000';
+}
+
+if(count($errors)){
+	$response = new Response(json_encode(['errors' => $errors]), 500, ['Content-Type' => 'application/json']);
+	$response->send();
+} else {
+
+	echo exec('bin/phantomjs scrape.js', $lines, $return);
+	$lines = shell_exec('nodejs /var/www/phantomjs/scraper.js -u "https://google.com" -f createUser -d 500');
+
+	$response = new Response($lines, 200, ['Content-Type' => 'application/json']);
+	$response->send();
+}
