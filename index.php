@@ -16,10 +16,15 @@
 					<div class="alert alert-danger" data-bind="html: errorString"></div>
 				</div>
 			<!-- /ko --> <!-- /if: errorString().length -->
+			<!-- ko if: messageString().length -->
+			<div class="col-md-12">
+				<div class="alert alert-info" data-bind="html: messageString"></div>
+			</div>
+			<!-- /ko --> <!-- /messageString().length -->
 			<div class="col-md-3">
 				<div class="list-group menu">
-					<a class="list-group-item active" href="#prefetch" data-toggle="tab">Prefetch Options</a>
-					<a class="list-group-item disabled" href="#fields" data-toggle="tab">Fields Default</a>
+					<a class="list-group-item active" href="#prefetch" id="prefetch-tab" data-toggle="tab">Prefetch Options</a>
+					<a class="list-group-item" href="#fields" id="fields-tab" data-toggle="tab" data-bind="css: {disabled: disableFieldsTab()}">Fields Default</a>
 				</div>
 			</div>
 			<div class="col-md-9 panel-container tab-content">
@@ -46,17 +51,51 @@
 							</div>
 						</div>
 					</div>
-					<button class="btn btn-primary" id="fetch" data-bind="click: fetchPage">Scrape That Page!</button>
+					<button class="btn btn-primary" id="fetch" data-bind="click: fetchPage, disable: fetchLoading()">Scrape That Page! <img src="static/img/ajax-loader.gif" data-bind="visible: fetchLoading()" /> </button>
 				</div>
 				<div class="tab-pane" id="fields">
-					adf
+					<div class="panel panel-primary">
+						<div class="panel-heading">Fields</div>
+						<div class="panel-body">
+							<!-- ko template: {name: fieldTemplate, foreach: fields} -->
+
+							<!-- /ko -->
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 
+		<!-- templates -->
+		<script id="formElementText" type="text/x-handlebars-template">
+			<div class="form-group">
+				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+			</div>
+		</script>
+		<script id="formElementSelect" type="text/x-handlebars-template">
+			<div class="form-group">
+				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+			</div>
+		</script>
+		<script id="formElementCheckbox" type="text/x-handlebars-template">
+			<div class="form-group">
+				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+			</div>
+		</script>
+		<script id="formElementTextarea" type="text/x-handlebars-template">
+			<div class="form-group">
+				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+			</div>
+		</script>
+
+
+		<!-- /templates -->
+
 		<script src="static/js/vendor/jquery.js"></script>
 		<script src="static/js/vendor/bootstrap.min.js"></script>
+		<script src="static/js/vendor/handlebars-v1.3.0.js"></script>
 		<script src="static/js/vendor/knockout.min.js"></script>
+		<script src="static/js/ko.handlebars.js"></script>
 		<script src="static/js/index.js"></script>
 	</body>
 </html>
