@@ -73,6 +73,8 @@ if(!testMode){
                             } else {
                                 selector = $('input,select,textarea');
                             }
+
+                            var fieldCounter = 0;
                             selector.each(function(){
                                 var $this = $(this);
                                 var type = $this.get(0).tagName.toLowerCase();
@@ -127,6 +129,7 @@ if(!testMode){
                                             fields.radios[properties.name] = [];
                                         }
                                         fields.radios[properties.name].push(properties);
+                                        fieldCounter++;
                                     }
                                 } else{
                                     var includeInput = true;
@@ -199,13 +202,14 @@ if(!testMode){
 
                                     if(includeInput){
                                         fields.notRadios.push(properties);
+                                        fieldCounter++;
                                     }
                                 }
                             });
 
-                            return fields;
-                        }, function(inputs){
-                            console.log(JSON.stringify({success: 1, inputs: inputs}));
+                            return {inputs: fields, count: fieldCounter};
+                        }, function(obj){
+                            console.log(JSON.stringify({success: 1, inputs: obj.inputs, count: obj.count}));
 
                             ph.exit();
                         }, form);
