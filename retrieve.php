@@ -74,8 +74,17 @@ if(count($errors)){
 	$response->send();
 } else {
 
-	echo exec('bin/phantomjs scrape.js', $lines, $return);
-	$lines = shell_exec('nodejs /var/www/phantomjs/scraper.js -u "https://google.com" -f createUser -d 500');
+	//Build request
+	$scraper_request = 'nodejs scraper.js -u ' . escapeshellarg($url);
+	if($form){
+		$scraper_request .= ' -f ' . escapeshellarg($form);
+	}
+	if($delay){
+		$scraper_request .= ' -d ' . escapeshellarg($delay);
+	}
+
+
+	$lines = shell_exec($scraper_request);
 
 	$response = new Response($lines, 200, ['Content-Type' => 'application/json']);
 	$response->send();
