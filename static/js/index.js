@@ -12,6 +12,7 @@ function Radio(data, name){
     var self = this;
 
     self.name = name;
+    self.type = 'radio';
 }
 
 function ViewModel(){
@@ -76,6 +77,8 @@ function ViewModel(){
                         }
                     }
 
+                    self.fields(localFields);
+
                 } else {
                     //Make sure we are on the first tab
                     showTab(0);
@@ -98,8 +101,8 @@ function ViewModel(){
 
     //choose the appropriate template to use
     self.fieldTemplate = function(field){
-        return field.type;
-    }
+        return 'formElement-' + field.type;
+    };
 
     var showTab = function(index){
         $('.menu').find('a').removeClass('active').eq(index).addClass('active').tab('show');

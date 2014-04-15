@@ -67,24 +67,29 @@
 		</div>
 
 		<!-- templates -->
-		<script id="formElementText" type="text/x-handlebars-template">
+		<script id="formElement-text" type="text/x-handlebars-template">
 			<div class="form-group">
 				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
 			</div>
 		</script>
-		<script id="formElementSelect" type="text/x-handlebars-template">
+		<script id="formElement-select" type="text/x-handlebars-template">
 			<div class="form-group">
 				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
 			</div>
 		</script>
-		<script id="formElementCheckbox" type="text/x-handlebars-template">
+		<script id="formElement-checkbox" type="text/x-handlebars-template">
 			<div class="form-group">
 				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
 			</div>
 		</script>
-		<script id="formElementTextarea" type="text/x-handlebars-template">
+		<script id="formElement-textarea" type="text/x-handlebars-template">
 			<div class="form-group">
 				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+			</div>
+		</script>
+		<script id="formElement-radio" type="text/x-handlebars-template">
+			<div class="form-group">
+				<label for="">{{name}}</label>
 			</div>
 		</script>
 
