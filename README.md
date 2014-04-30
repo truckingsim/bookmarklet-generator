@@ -17,7 +17,7 @@ Once you have that running you need to install 2 node modules, phantom and stdio
 
 `sudo npm install phantom`
 
-`sudo npm install https://github.com/truckingsim/stdio/archive/0.1.6.tar.gz`
+`sudo npm install stdio`
 
 
 We have to use a custom version of stdio due to the way it handles equal signs.  Any url passed as a parameter with an equal sign (such as with GET parameters) would cause the URL to be broken up into multiple arguments.
