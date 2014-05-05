@@ -69,9 +69,9 @@ if(!testMode){
 
                             var selector;
                             if(form){
-                                selector = $(form).find('input,select,textarea');
+                                selector = $(form).find('input,select,textarea').not('[type=hidden],[type=submit],[type=button]');
                             } else {
-                                selector = $('input,select,textarea');
+                                selector = $('input,select,textarea').not('[type=hidden],[type=submit],[type=button]');
                             }
 
                             var fieldCounter = 0;
