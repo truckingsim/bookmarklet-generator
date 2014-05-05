@@ -19,10 +19,6 @@ Once you have that running you need to install 2 node modules, phantom and stdio
 
 `sudo npm install stdio`
 
-
-We have to use a custom version of stdio due to the way it handles equal signs.  Any url passed as a parameter with an equal sign (such as with GET parameters) would cause the URL to be broken up into multiple arguments.
-
-
 Once those are installed you should be good to go! 
 
 To test whether the scraper is going to work after setup run:
