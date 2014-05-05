@@ -34,7 +34,7 @@
 						<div class="panel-body">
 							<div class="form-group">
 								<label for="url"><span data-toggle="tooltip" title="http:// or https:// required">URL</span> </label>
-								<input class="form-control" id="url" type="text" data-bind="value: url, valueUpdate: 'afterkeydown'" />
+								<input class="form-control" id="url" type="text" tabindex="1" data-bind="value: url, valueUpdate: 'afterkeydown'" />
 							</div>
 						</div>
 					</div>
@@ -57,8 +57,10 @@
 					<div class="panel panel-primary">
 						<div class="panel-heading">Fields</div>
 						<div class="panel-body">
-							<!-- ko template: {name: fieldTemplate, foreach: fields} -->
+							<!-- ko foreach: fields -->
+								<!-- ko template: {name: templateName, data: $data} -->
 
+								<!-- /ko -->
 							<!-- /ko -->
 						</div>
 					</div>
@@ -70,26 +72,37 @@
 		<script id="formElement-text" type="text/x-handlebars-template">
 			<div class="form-group">
 				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+				<input id="" type="text" name="" value="" >
 			</div>
 		</script>
 		<script id="formElement-select" type="text/x-handlebars-template">
 			<div class="form-group">
 				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+				<select id="" name="">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
 			</div>
 		</script>
 		<script id="formElement-checkbox" type="text/x-handlebars-template">
 			<div class="form-group">
 				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+				<input id="" type="checkbox" name="">
 			</div>
 		</script>
 		<script id="formElement-textarea" type="text/x-handlebars-template">
 			<div class="form-group">
 				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+				<textarea id="" name="" cols="30" rows="10"></textarea>
 			</div>
 		</script>
 		<script id="formElement-radio" type="text/x-handlebars-template">
 			<div class="form-group">
 				<label for="">{{name}}</label>
+				<input id="" type="radio" name="">
 			</div>
 		</script>
 

@@ -13,8 +13,6 @@ ko.handlebarsTemplateEngine.prototype = ko.utils.extend(new ko.templateEngine(),
             this.templates[templateId] = compiledTemplate;
         }
 
-        console.log('what');
-
         return ko.utils.parseHtmlFragment(compiledTemplate(data));
     },
     allowTemplateRewriting: false

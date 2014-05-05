@@ -5,6 +5,7 @@ function Field(data){
     var self = this;
 
     self.value = ko.observable('');
+    self.templateName = 'formElement-' + self.type;
 }
 
 function Radio(data, name){
@@ -13,6 +14,7 @@ function Radio(data, name){
 
     self.name = name;
     self.type = 'radio';
+    self.templateName = 'formElement-' + self.type;
 }
 
 function ViewModel(){
@@ -101,7 +103,7 @@ function ViewModel(){
 
     //choose the appropriate template to use
     self.fieldTemplate = function(field){
-        return 'formElement-' + field.type;
+    	return field.templateName;
     };
 
     var showTab = function(index){
