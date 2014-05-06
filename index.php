@@ -57,7 +57,7 @@
 					<div class="panel panel-primary">
 						<div class="panel-heading">Fields</div>
 						<div class="panel-body">
-							<!-- ko template: {name: function(item){ return item.templateName}, foreach: fields} -->
+							<!-- ko template: {name: 'formTemplates', foreach: fields} -->
 							<!-- /ko -->
 						</div>
 					</div>
@@ -65,16 +65,38 @@
 			</div>
 		</div>
 
-		<!-- templates -->
-		<script id="formElement-text" type="text/x-handlebars-template">
+		<script id="formTemplates" type="text/html">
+			<!-- ko if: type === 'text' -->
+				<!-- ko template: {name: templateName, data: $data} -->
+				<!-- /ko -->
+			<!-- /ko -->
+			<!-- ko if: type === 'select' -->
+				<!-- ko template: {name: templateName, data: $data} -->
+				<!-- /ko -->
+			<!-- /ko -->
+			<!-- ko if: type === 'checkbox' -->
+				<!-- ko template: {name: templateName, data: $data} -->
+				<!-- /ko -->
+			<!-- /ko -->
+			<!-- ko if: type === 'radio' -->
+				<!-- ko template: {name: templateName, data: $data} -->
+				<!-- /ko -->
+			<!-- /ko -->
+			<!-- ko if: type === 'textarea' -->
+				<!-- ko template: {name: templateName, data: $data} -->
+				<!-- /ko -->
+			<!-- /ko -->
+		</script>
+
+		<script id="formElement-text" type="text/html">
 			<div class="form-group">
-				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+				<label for="" data-bind="text: name || id"></label>
 				<input id="" type="text" name="" value="" >
 			</div>
 		</script>
-		<script id="formElement-select" type="text/x-handlebars-template">
+		<script id="formElement-select" type="text/html">
 			<div class="form-group">
-				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+				<label for="" data-bind="text: name || id"></label>
 				<select id="" name="">
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -84,33 +106,31 @@
 				</select>
 			</div>
 		</script>
-		<script id="formElement-checkbox" type="text/x-handlebars-template">
+		<script id="formElement-checkbox" type="text/html">
 			<div class="form-group">
-				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+				<label for="" data-bind="text: name || id"></label>
 				<input id="" type="checkbox" name="">
 			</div>
 		</script>
-		<script id="formElement-textarea" type="text/x-handlebars-template">
+		<script id="formElement-textarea" type="text/html">
 			<div class="form-group">
-				<label for="">{{#if label}}{{label}}{{else}}{{id}}{{/if}}</label>
+				<label for="" data-bind="text: name || id"></label>
 				<textarea id="" name="" cols="30" rows="10"></textarea>
 			</div>
 		</script>
-		<script id="formElement-radio" type="text/x-handlebars-template">
+		<script id="formElement-radio" type="text/html">
 			<div class="form-group">
-				<label for="">{{name}}</label>
+				<label for="" data-bind="text: name || id"></label>
 				<input id="" type="radio" name="">
 			</div>
 		</script>
-
-
 		<!-- /templates -->
 
 		<script src="static/js/vendor/jquery.js"></script>
 		<script src="static/js/vendor/bootstrap.min.js"></script>
-		<script src="static/js/vendor/handlebars-v1.3.0.js"></script>
+		<!-- <script src="static/js/vendor/handlebars-v1.3.0.js"></script> -->
 		<script src="static/js/vendor/knockout.min.js"></script>
-		<script src="static/js/ko.handlebars.js"></script>
+		<!-- <script src="static/js/ko.handlebars.js"></script> -->
 		<script src="static/js/index.js"></script>
 	</body>
 </html>
