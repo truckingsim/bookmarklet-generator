@@ -57,10 +57,7 @@
 					<div class="panel panel-primary">
 						<div class="panel-heading">Fields</div>
 						<div class="panel-body">
-							<!-- ko foreach: fields -->
-								<!-- ko template: {name: templateName, data: $data} -->
-
-								<!-- /ko -->
+							<!-- ko template: {name: function(item){ return item.templateName}, foreach: fields} -->
 							<!-- /ko -->
 						</div>
 					</div>
