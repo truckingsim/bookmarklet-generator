@@ -59,6 +59,8 @@
 						<div class="panel-body">
 							<!-- ko template: {name: 'formTemplates', foreach: fields} -->
 							<!-- /ko -->
+							<button data-bind="click: generateJavascriptString">Generate JavaScripts!!</button>
+							<a data-bind="attr: {href: javascriptString}, visible: javascriptString().length"></a>
 						</div>
 					</div>
 				</div>
@@ -91,13 +93,13 @@
 		<script id="formElement-text" type="text/html">
 			<div class="form-group">
 				<label for="" data-bind="text: name || id"></label>
-				<input id="" type="text" name="" value="" >
+				<input id="" type="text" name="" value="" data-bind="value: value, valueUpdate: 'afterkeydown'">
 			</div>
 		</script>
 		<script id="formElement-select" type="text/html">
 			<div class="form-group">
 				<label for="" data-bind="text: name || id"></label>
-				<select id="" name="">
+				<select id="" name="" data-bind="value: value">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -109,13 +111,13 @@
 		<script id="formElement-checkbox" type="text/html">
 			<div class="form-group">
 				<label for="" data-bind="text: name || id"></label>
-				<input id="" type="checkbox" name="">
+				<input id="" type="checkbox" name="" data-bind="checked: value">
 			</div>
 		</script>
 		<script id="formElement-textarea" type="text/html">
 			<div class="form-group">
 				<label for="" data-bind="text: name || id"></label>
-				<textarea id="" name="" cols="30" rows="10"></textarea>
+				<textarea id="" name="" cols="30" rows="10" data-bind="value: value, valueUpdate: 'afterkeydown'"></textarea>
 			</div>
 		</script>
 		<script id="formElement-radio" type="text/html">

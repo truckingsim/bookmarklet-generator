@@ -101,10 +101,11 @@ function ViewModel(){
         });
     };
 
-    //choose the appropriate template to use
-    self.fieldTemplate = function(field){
-    	return field.templateName;
-    };
+	self.generateJavascriptString = function(){
+		console.log($.parseJSON(ko.toJSON(self.fields)));
+	}
+
+	self.javascriptString = ko.observable('');
 
     var showTab = function(index){
         $('.menu').find('a').removeClass('active').eq(index).addClass('active').tab('show');
