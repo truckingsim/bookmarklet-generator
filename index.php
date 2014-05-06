@@ -43,15 +43,15 @@
 						<div class="panel-body">
 							<div class="form-group">
 								<label for="form">Form Container (<span data-toggle="tooltip" title=".class or #id">css selector format</span>)</label>
-								<input class="form-control" id="form" type="text" data-bind="value: form, valueUpdate: 'afterkeydown'" />
+								<input class="form-control" id="form" type="text" tabindex="2" data-bind="value: form, valueUpdate: 'afterkeydown'" />
 							</div>
 							<div class="form-group">
 								<label for="delay"><span data-toggle="tooltip" title="max 15000, min 0">Delay</span> in milliseconds </label>
-								<input class="form-control" id="delay" type="number" max="15000" min="0" data-bind="value: delay, valueUpdate: 'afterkeydown'" />
+								<input class="form-control" id="delay" type="number" max="15000" min="0" tabindex="3" data-bind="value: delay, valueUpdate: 'afterkeydown'" />
 							</div>
 						</div>
 					</div>
-					<button class="btn btn-primary" id="fetch" data-bind="click: fetchPage, disable: fetchLoading()">Scrape That Page! <img src="static/img/ajax-loader.gif" data-bind="visible: fetchLoading()" /> </button>
+					<button class="btn btn-primary" id="fetch" tabindex="4" data-bind="click: fetchPage, disable: fetchLoading()">Scrape That Page! <img src="static/img/ajax-loader.gif" data-bind="visible: fetchLoading()" /> </button>
 				</div>
 				<div class="tab-pane" id="fields">
 					<div class="panel panel-primary">
