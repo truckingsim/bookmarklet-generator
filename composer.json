@@ -1,5 +1,7 @@
 {
     "require": {
-        "symfony/http-foundation": "2.4.*"
+        "symfony/http-foundation": "2.4.*",
+        "nervo/yuicompressor": "dev-master",
+        "jalle19/php-yui-compressor": "dev-master"
     }
 }
