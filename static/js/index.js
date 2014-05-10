@@ -1,21 +1,54 @@
-//;(function(){
+var radioValues = {};
 
-function Field(data){
-    $.extend(this, data);
+var getRadioValue = function(name, value, selected){
+    if(!radioValues[name]){
+        radioValues[name] = ko.observable('');
+    }
+
+    if(selected){
+        radioValues[name] = value;
+    }
+
+    return radioValues[name];
+};
+
+var Field = function(data){
     var self = this;
 
-    self.value = ko.observable('');
-    self.templateName = 'formElement-' + self.type;
-}
+    //Each field type gets its own function in case we need to do anything special to it.  If not its a placeholder
+    self._select = function(){
+        self.value = ko.observable(self.value || '');
+    };
 
-function Radio(data, name){
-    $.extend(this, data);
-    var self = this;
+    self._text = function(){
+        self.value = ko.observable(self.value || '');
+    };
 
-    self.name = name;
-    self.type = 'radio';
+    self._checkbox = function(){
+        self.selected = ko.observable(false);
+        self.value = ko.observable(self.value || false);
+    };
+
+    self._textarea = function(){
+        self.value = ko.observable(self.value || '');
+    };
+
+    self._radio = function(){
+        self.templateName = 'formElement-' + self.type;
+        self.selected = getRadioValue(self.name, self.value, self.selected);
+        self.value = ko.observable(self.value);
+    };
+
+    $.extend(self, data);
     self.templateName = 'formElement-' + self.type;
-}
+
+
+    //Initialize based on field type:
+    self['_' + self.type]();
+};
+
+
+
 
 function ViewModel(){
     var self = this;
@@ -74,7 +107,7 @@ function ViewModel(){
                     if(Object.keys(data.inputs.radios).length){
                         for(var name in data.inputs.radios){
                             if(data.inputs.radios.hasOwnProperty(name)){
-                                localFields.push(new Radio(data.inputs.radios[name], name));
+                                localFields.push(new Field(data.inputs.radios[name], name));
                             }
                         }
                     }
@@ -103,7 +136,7 @@ function ViewModel(){
 
 	self.generateJavascriptString = function(){
 		console.log($.parseJSON(ko.toJSON(self.fields)));
-	}
+	};
 
 	self.javascriptString = ko.observable('');
 
@@ -137,5 +170,3 @@ $(function(){
     $('span[data-toggle=tooltip]').tooltip();
     ko.applyBindings(vModel);
 });
-
-//})();
