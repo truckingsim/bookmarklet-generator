@@ -90,6 +90,9 @@ if(!testMode){
                                 }
 
                                 if(type === 'input' && $this.prop('type') === 'radio'){
+                                    //Make sure we get the value of the radio so we can choose correctly
+                                    properties.value = $this.val();
+                                    properties.selected = $this.is(':checked');
                                     //We are going to look for a label so we know what we are choosing
                                     //If we feel we can't find a label it will attempt to use the ID
                                     //If we still don't have an ID we will not add the field to the list
@@ -126,9 +129,11 @@ if(!testMode){
 
                                     if(properties.label){
                                         if(!fields.radios.hasOwnProperty(properties.name)){
-                                            fields.radios[properties.name] = [];
+                                            fields.radios[properties.name] = {fields: [], type: 'radio', name: properties.name};
                                         }
-                                        fields.radios[properties.name].push(properties);
+
+
+                                        fields.radios[properties.name].fields.push(properties);
                                         fieldCounter++;
                                     }
                                 } else{
