@@ -92,47 +92,78 @@
 
 		<script id="formElement-text" type="text/html">
 			<div class="form-group">
-				<label for="" data-bind="text: name || id"></label>
-				<input id="" type="text" name="" value="" data-bind="value: value, valueUpdate: 'afterkeydown'">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="" data-bind="text: name || id"></label>
+					</div>
+					<div class="col-md-8">
+						<input id="" type="text" name="" value="" data-bind="value: value, valueUpdate: 'afterkeydown'">
+					</div>
+				</div>
 			</div>
 		</script>
 		<script id="formElement-select" type="text/html">
 			<div class="form-group">
-				<label for="" data-bind="text: name || id"></label>
-				<select id="" name="" data-bind="value: value">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-				</select>
+				<div class="row">
+					<div class="col-md-4">
+						<label for="" data-bind="text: name || id"></label>
+					</div>
+					<div class="col-md-8">
+						<select id="" name="" data-bind="value: value">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+					</div>
+				</div>
 			</div>
 		</script>
 		<script id="formElement-checkbox" type="text/html">
 			<div class="form-group">
-				<label for="" data-bind="text: name || id"></label>
-				<input id="" type="checkbox" name="" data-bind="checked: value">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="" data-bind="text: name || id"></label>
+					</div>
+					<div class="col-md-8">
+						<input id="" type="checkbox" name="" data-bind="checked: selected, value: value">
+					</div>
+				</div>
 			</div>
 		</script>
 		<script id="formElement-textarea" type="text/html">
 			<div class="form-group">
-				<label for="" data-bind="text: name || id"></label>
-				<textarea id="" name="" cols="30" rows="10" data-bind="value: value, valueUpdate: 'afterkeydown'"></textarea>
+				<div class="row">
+					<div class="col-md-4">
+						<label for="" data-bind="text: name || id"></label>
+					</div>
+					<div class="col-md-8">
+						<textarea id="" name="" cols="30" rows="10" data-bind="value: value, valueUpdate: 'afterkeydown'"></textarea>
+					</div>
+				</div>
 			</div>
 		</script>
 		<script id="formElement-radio" type="text/html">
 			<div class="form-group">
-				<label for="" data-bind="text: name || id"></label>
-				<input id="" type="radio" name="">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="" data-bind="text: name || id"></label>
+					</div>
+					<div class="col-md-8">
+						<!-- ko foreach: fields -->
+							<label data-bind="attr: {for: id}, text: label || id"></label>
+							<input type="radio" data-bind="attr: {name: name, id: id}, value: value, checked: selected" />
+						<!-- /ko -->
+					</div>
+				</div>
 			</div>
 		</script>
 		<!-- /templates -->
 
 		<script src="static/js/vendor/jquery.js"></script>
 		<script src="static/js/vendor/bootstrap.min.js"></script>
-		<!-- <script src="static/js/vendor/handlebars-v1.3.0.js"></script> -->
 		<script src="static/js/vendor/knockout.min.js"></script>
-		<!-- <script src="static/js/ko.handlebars.js"></script> -->
 		<script src="static/js/index.js"></script>
 	</body>
 </html>
