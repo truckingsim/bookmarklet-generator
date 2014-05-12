@@ -75,7 +75,7 @@ Then you likely don't have phantom-node installed.  Make sure you have run: `sud
 
 Then you likely don't have stdio installed.  Make sure your run 
 
-    sudo npm install https://github.com/truckingsim/stdio/archive/0.1.6.tar.gz
+    sudo npm install stdio
     
 Where 0.1.6 is the latest release.
 
