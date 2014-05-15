@@ -46,7 +46,8 @@
 								<input class="form-control" id="form" type="text" tabindex="2" data-bind="value: form, valueUpdate: 'afterkeydown'" />
 							</div>
 							<div class="form-group">
-								<label for="delay"><span data-toggle="tooltip" title="max 15000, min 0">Delay</span> in milliseconds </label>
+								<label for="delay" class="pull-left"><span data-toggle="tooltip" title="max 15000, min 0">Delay</span> in milliseconds </label>
+								<a href="https://gist.github.com/truckingsim/29310824d8cd7507960d#comment-1228854">Container Selector bookmarklet, go to </a>
 								<input class="form-control" id="delay" type="number" max="15000" min="0" tabindex="3" data-bind="value: delay, valueUpdate: 'afterkeydown'" />
 							</div>
 						</div>
@@ -60,7 +61,7 @@
 							<!-- ko template: {name: 'formTemplates', foreach: fields} -->
 							<!-- /ko -->
 							<button class="btn btn-primary" data-bind="click: generateJavascriptString">Generate JavaScripts!!</button>
-							<a data-bind="attr: {href: javascriptString}, visible: javascriptString().length"></a>
+							<a data-bind="attr: {href: javascriptString}, visible: javascriptString().length" class="btn btn-success">Drag Me!</a>
 						</div>
 					</div>
 				</div>

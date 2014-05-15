@@ -60,9 +60,9 @@ function ViewModel(){
     var self = this;
 
     //Fetch settings
-    self.url = ko.observable('');
+    self.url = ko.observable('http://localhost/forms');
     self.form = ko.observable('');
-    self.delay = ko.observable(1000);
+    self.delay = ko.observable(0);
 
     //Fetch other fields
     self.errorString = ko.observable('');
@@ -141,7 +141,18 @@ function ViewModel(){
     };
 
 	self.generateJavascriptString = function(){
-		console.log($.parseJSON(ko.toJSON(self.fields)));
+        $.ajax('generate.php', {
+            dataType: 'html',
+            type: 'POST',
+            data: {fields: ko.toJSON(self.fields)},
+            success: function(data){
+                self.javascriptString(data);
+            },
+            error: function(){
+
+            },
+            complete: function(){}
+        });
 	};
 
 	self.javascriptString = ko.observable('');

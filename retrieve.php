@@ -16,7 +16,7 @@ $errors = [];
  */
 
 //We are going to allow script to be run from either ajax or command line for now
-if(count($argv)){
+if(isset($argv) && count($argv)){
 	$unnamedParameters = 0;
 	$nextNamedParameter = '';
 	$useAsValue = false;
