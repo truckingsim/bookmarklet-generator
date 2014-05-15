@@ -24,6 +24,12 @@ var Field = function(data){
         self.value = ko.observable(self.value || '');
     };
 
+    self._password = function(){
+        //For now passwords will act like text boxes
+        self.templateName = 'formElement-text';
+        self._text();
+    };
+
     self._checkbox = function(){
         self.selected = ko.observable(false);
         self.value = ko.observable(self.value || false);

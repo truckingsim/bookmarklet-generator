@@ -59,7 +59,7 @@
 						<div class="panel-body">
 							<!-- ko template: {name: 'formTemplates', foreach: fields} -->
 							<!-- /ko -->
-							<button data-bind="click: generateJavascriptString">Generate JavaScripts!!</button>
+							<button class="btn btn-primary" data-bind="click: generateJavascriptString">Generate JavaScripts!!</button>
 							<a data-bind="attr: {href: javascriptString}, visible: javascriptString().length"></a>
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 		</div>
 
 		<script id="formTemplates" type="text/html">
-			<!-- ko if: type === 'text' -->
+			<!-- ko if: type === 'text' || type === 'password' -->
 				<!-- ko template: {name: templateName, data: $data} -->
 				<!-- /ko -->
 			<!-- /ko -->
@@ -97,7 +97,7 @@
 						<label for="" data-bind="text: name || id"></label>
 					</div>
 					<div class="col-md-8">
-						<input id="" type="text" name="" value="" data-bind="value: value, valueUpdate: 'afterkeydown'">
+						<input id="" type="text" name="" value="" class="form-control" data-bind="value: value, valueUpdate: 'afterkeydown'">
 					</div>
 				</div>
 			</div>
@@ -109,12 +109,7 @@
 						<label for="" data-bind="text: name || id"></label>
 					</div>
 					<div class="col-md-8">
-						<select id="" name="" data-bind="value: value">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
+						<select id="" name="" data-bind="value: value, options: options, optionsValue: 'value', optionsText: 'text'" class="form-control">
 						</select>
 					</div>
 				</div>
@@ -139,7 +134,7 @@
 						<label for="" data-bind="text: name || id"></label>
 					</div>
 					<div class="col-md-8">
-						<textarea id="" name="" cols="30" rows="10" data-bind="value: value, valueUpdate: 'afterkeydown'"></textarea>
+						<textarea id="" class="form-control" name="" cols="30" rows="10" data-bind="value: value, valueUpdate: 'afterkeydown'"></textarea>
 					</div>
 				</div>
 			</div>

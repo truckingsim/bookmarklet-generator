@@ -180,8 +180,12 @@ if(!testMode){
                                                     includeInput = false;
                                                 }
                                                 break;
+                                            case 'password':
+                                                properties.type = 'password';
+                                                break;
                                             default:
-                                                properties.type = inputType;
+                                                //We have to add field types manually so default to text type
+                                                properties.type = 'text';
                                                 break;
                                         }
                                     }
