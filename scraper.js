@@ -30,7 +30,7 @@ debug = ops.debug;
  *
  * This is only for testing purposes so we use phantomjs folder
  */
-jQuery = ops.localjQuery ? 'http://localhost/phantomjs/static/js/jquery.js' : 'https://code.jquery.com/jquery-2.1.0.min.js';
+jQuery = ops.localjQuery ? 'http://localhost/phantomjs/static/js/vendor/jquery.js' : 'https://code.jquery.com/jquery-2.1.0.min.js';
 
 //Test mode setup, since url is required we are going to set it to google if test mode is active
 if(ops.args && ops.args.length && ops.args[0] === 'test'){
@@ -88,6 +88,48 @@ if(!testMode){
                                 if($this.prop('id') && $this.prop('id').length){
                                     properties.id = $this.prop('id');
                                 }
+
+                                //Generate selector
+                                properties.selector = properties.id ? '#' + properties.id : false;
+								properties.use_eq = false;
+
+                                if(!properties.selector){
+									//Attempt to build a unique selector
+									var tempSelector = type;
+
+									if($this.prop('type')){
+										tempSelector += '[type="' + $this.prop('type') + '"]';
+									} else {
+										tempSelector += ':text';
+									}
+
+									if(properties.name){
+										tempSelector += '[name="' + properties.name + '"]';
+									}
+
+									var $temp = $(tempSelector);
+
+									if($temp.length === 0){
+										tempSelector = type;
+										$temp = $(tempSelector);
+									}
+
+									if($temp.length > 1){
+										properties.use_eq = true;
+										var index = 0;
+
+										$temp.each(function(){
+											if(this === $this.get(0)){
+												return false;
+											}
+											index++;
+										});
+										
+										properties.eq = index;
+									}
+
+									properties.selector = tempSelector;
+								}
 
                                 if(type === 'input' && $this.prop('type') === 'radio'){
                                     //Make sure we get the value of the radio so we can choose correctly

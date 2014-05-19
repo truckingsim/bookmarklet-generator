@@ -12,9 +12,13 @@ $script = '(function($){';
 
 foreach($allFields as $index => $field){
 	//For now just fields with ID's
-	if($field->type !== 'radio' && property_exists($field, 'id')){
+	if($field->type !== 'radio'){
 		//Build selector
-		$selector = "$('#" . $field->id . "')";
+		$selector = "$('" . $field->selector . "')";
+
+		if($field->use_eq){
+			$selector .= ".eq(" . $field->eq . ")";
+		}
 
 		if($field->type !== 'radio' && $field->type !== 'checkbox'){
 			$script .= $selector . ".val('" . $field->value . "');";
@@ -38,6 +42,8 @@ $yui->setType(\YUI\Compressor::TYPE_JS);
 $script = $yui->compress($script);
 
 $script = 'javascript:' . $script;
+
+//var_dump($script);
 
 $response = new Response($script, 200, ['Content-Type' => 'text/html']);
 $response->send();

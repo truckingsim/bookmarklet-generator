@@ -83,7 +83,7 @@ if(count($errors)){
 		$scraper_request .= ' -d ' . escapeshellarg($delay);
 	}
 
-
+	$scraper_request .= ' --localjQuery';
 	$lines = shell_exec($scraper_request);
 
 	$response = new Response($lines, 200, ['Content-Type' => 'application/json']);
