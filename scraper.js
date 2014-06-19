@@ -108,23 +108,30 @@ if(!testMode){
 									}
 
 									var $temp = $(tempSelector);
-
+									// First try to find the element with the selector built above.
 									if($temp.length === 0){
+										// If that got no results set $tem based on type (ex. input)
 										tempSelector = type;
 										$temp = $(tempSelector);
 									}
 
+									
+									// No matter the result from above see if it matches the exact element.
+									//   This works even if all the attributes are identical on two elements
 									if($temp.length > 1){
+										// We are going to have to use eq to get the element
 										properties.use_eq = true;
 										var index = 0;
 
 										$temp.each(function(){
 											if(this === $this.get(0)){
+												// This is how to break out of a jQuery .each loop
 												return false;
 											}
 											index++;
 										});
 										
+										// Set the index so that we can then build a viable selector when generating the JS
 										properties.eq = index;
 									}
 
