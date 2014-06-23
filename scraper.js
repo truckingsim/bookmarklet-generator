@@ -87,6 +87,14 @@ if(!testMode){
 
                                 if($this.prop('id') && $this.prop('id').length){
                                     properties.id = $this.prop('id');
+                                    // We have to use this selector due to sizzle always returning 
+                                    // 	1 element when using the # symbol.  This ensures we will
+                                    // 	always get the actual number of elements using the id on the page
+                                    if($('[id="' + properties.id + '"]').length > 1){
+                                    	// If there is more than one element with the same id
+                                    	// 	this field is useless to us.
+                                    	properties.id = false;
+									}
                                 }
 
                                 //Generate selector
