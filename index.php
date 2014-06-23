@@ -50,6 +50,10 @@
 								<a href="https://gist.github.com/truckingsim/29310824d8cd7507960d#comment-1228854">Container Selector bookmarklet, go to </a>
 								<input class="form-control" id="delay" type="number" max="15000" min="0" tabindex="3" data-bind="value: delay, valueUpdate: 'afterkeydown'" />
 							</div>
+							<div class="form-group">
+								<label for="bookmarklet-name">Name for bookmarklet (<span data-toggle="tooltip" title="This is what the title of the bookmarklet will be in your bookmark bar">?</span>)</label>
+								<input class="form-control" id="bookmarklet-name" type="text" data-bind="value: bookmarkletName, valueUpdate: 'afterkeydown'" />
+							</div>
 						</div>
 					</div>
 					<button class="btn btn-primary" id="fetch" tabindex="4" data-bind="click: fetchPage, disable: fetchLoading()">Scrape That Page! <img src="static/img/ajax-loader.gif" data-bind="visible: fetchLoading()" /> </button>
